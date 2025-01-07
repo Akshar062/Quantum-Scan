@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.unit.dp
 import org.akshar.quantum_scan.bottomNavigationWidgets.Circle
 import org.akshar.quantum_scan.bottomNavigationWidgets.CustomBottomNavigation
@@ -51,12 +52,13 @@ fun MainContent(
     )
 
     val renderEffect = remember {
-        getPlatformRenderEffect()
+        getPlatformRenderEffect() as? RenderEffect
     }
+
 
     MainScreenContent(
         modifier = modifier,
-        renderEffect = renderEffect as? androidx.compose.ui.graphics.RenderEffect,
+        renderEffect = renderEffect,
         fabAnimationProgress = fabAnimationProgress,
         clickAnimationProgress = clickAnimationProgress,
     ) {
@@ -66,7 +68,7 @@ fun MainContent(
 @Composable
 fun MainScreenContent(
     modifier: Modifier = Modifier,
-    renderEffect: androidx.compose.ui.graphics.RenderEffect?,
+    renderEffect: RenderEffect?,
     fabAnimationProgress: Float = 0f,
     clickAnimationProgress: Float = 0f,
     toggleAnimation: () -> Unit = { }
